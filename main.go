@@ -2,26 +2,24 @@ package main
 
 import (
 	"fmt"
-	"projects/handler"
+	"projects/signin"
 )
 
 func main() {
-	var RegisterNickname, RegisterPassword, PasswordCheck string
-
-	fmt.Println("Create your nickname: ")
-	fmt.Scan(&RegisterNickname)
+	var User signin.UserPass
+	var passwordCheck string
+	fmt.Println("Enter your email")
+	fmt.Scan(&User.Email)
 
 	fmt.Println("Create your password: ")
-	fmt.Scan(&RegisterPassword)
-	for {
-		fmt.Println("Confirm your password: ")
-		fmt.Scan(&PasswordCheck)
+	fmt.Scan(&User.Password)
 
-		if PasswordCheck == RegisterPassword {
-			handler.SuccessPage()
-			break
-		} else {
-			fmt.Println("Passwords do not match. Please try again.")
-		}
+	fmt.Println("Confirm your password: ")
+	fmt.Scan(&passwordCheck)
+
+	if signin.VerifyPassword(User.Password, passwordCheck) {
+		signin.SigninPage(User)
+	} else {
+		fmt.Println("Passwords are not simple.")
 	}
 }
