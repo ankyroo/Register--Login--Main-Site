@@ -14,12 +14,15 @@ func main() {
 	fmt.Println("Create your password: ")
 	fmt.Scan(&User.Password)
 
-	fmt.Println("Confirm your password: ")
-	fmt.Scan(&passwordCheck)
+	for {
 
-	if signin.VerifyPassword(User.Password, passwordCheck) {
-		signin.SigninPage(User)
-	} else {
-		fmt.Println("Passwords are not simple.")
+		fmt.Println("Confirm your password: ")
+		fmt.Scan(&passwordCheck)
+
+		if signin.VerifyPassword(User.Password, passwordCheck) {
+			signin.SigninPage(User)
+		} else {
+			fmt.Println("Passwords are not simple.")
+		}
 	}
 }
